@@ -2,7 +2,8 @@
 Combine screenshots taken by 3DS NTR CFW using Windows Command Line and ImageMagick.
 
 This could potentially support *hax 2.5 screenshots, the only difference is the naming scheme.    
-However, I'm lazy.
+Could also potentially be made for Bash, given most of the work is done by ImageMagick.
+However, I'm lazy. I'll gladly accept pull requests that accomplish this.
 
 Utilizes a sort of "preset" system to config basic options to achieve results.    
 Scroll down to see examples of default presets included.
