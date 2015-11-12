@@ -1,11 +1,13 @@
 :: Intended to be used with 3DS NTR CFW's screenshot function, which spits out individual top and bottom screens.
 :: Save this batch file as "whateveryouwanttocallit.bat" and place in the folder with your top_####.bmp and bot_####.bmp files.
+:: Also supports HANS/*hax 2.5 screenshots in scr_#_*.png naming.
 
 :: If run without specifying a preset (usually by double-clicking), it'll use the "native" preset, which replicates home menu screenshots.
 :: Otherwise, the first argument should be the preset name.
 
 :: Requires ImageMagick (latest preferred) to be installed and in your path ("convert" should be available from cmd).
 :: Get it here: http://imagemagick.org/script/binary-releases.php#windows
+:: The ImageMagick commands here aren't that bad, but definitely could be optimized with temporary image lists instead of working off temp files.
 
 @echo off
 
@@ -28,6 +30,8 @@ set top_screen=left
 :: If top_screen is "both", this is the screen on the left side. Default: right
 :: Right would be cross-eye 3D, left would be parallel view.
 set both_sbs=right
+:: If top_screen is "both", duplicate the bottom screen for each eye for 3D viewing. Default: yes
+set dupe_bot=yes
 
 
 ::
@@ -104,6 +108,7 @@ goto :eof
     set left=scr_%temp%_TOP_LEFT.png
     set right=scr_%temp%_TOP_RIGHT.png
     set top=temp_top_%temp%.png
+    set ops=-gravity center -background %color%
     
     :: Select the correct or combine the two top screens.
     :: The If block we didn't know we needed. Surely this can be optimized.
@@ -113,7 +118,12 @@ goto :eof
     if "%top_screen%" == "left" convert %left% %top%
     if "%top_screen%" == "right" convert %right% %top%
     
-    convert -gravity center -background %color% %top% %bottom% -append %prefix%%temp%.png
+
+    :: If using both screens and duping bottom, do so.
+    set dupe=%bottom%
+    if "%top_screen%" == "both" if "%dupe_bot%" == "yes" set dupe=( -extent 400x240 %bottom% %bottom% +append ) 
+
+    convert %ops% %top% %dupe% -append %prefix%%temp%.png
     
     if "%cleantemp%" == "yes" del %top%
     if "%cleansource%" == "yes" del %bottom% & del %left% & del %right% 
