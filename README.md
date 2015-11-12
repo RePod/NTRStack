@@ -1,6 +1,7 @@
 # NTRStack
-Combine screenshots taken by 3DS NTR CFW using Windows Command Line and ImageMagick.
-Also supports HANS/*hax 2.5+ screenshots, with side-by-side 3D options.
+Preset-based converter for NTR and HANS screenshots.    
+Combines NTR and HANS screenshots in various, configurable ways using ImageMagick.    
+HANS has additional options for side-by-side 3D images.
 
 Utilizes a sort of "preset" system to config basic options to achieve results.    
 Scroll down to see examples of default presets included.
