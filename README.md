@@ -23,11 +23,15 @@ How to:
 4. Run the BAT.
  - The first argument can be the preset name.
 
-**"native" preset:** *(pads similar to homemenu screenshots)*    
+Default presets:
+----
+Click images to see a more detailed view of dimensions and transparency.
+
+**native** *(pads similar to homemenu screenshots, padding white)*    
 !["native" preset](sample/HNI_0000.png)
 
-**"default" preset:** *(stacks them normally)*    
+**default** *(stacks them normally, bottom padding transparent)*    
 ![](sample/scr_0000.png)
 
-**"wide" preset:** *(puts them side by side)*    
+**wide** *(puts them side by side)*    
 ![](sample/wide_0000.png)
