@@ -22,5 +22,11 @@ This could potentially support *hax 2.5 screenshots, the only difference is the 
 
 However, I'm lazy.
 
-![](sample/HNI_0000.png)
+**"native" preset:**    
+!["native" preset](sample/HNI_0000.png)
+
+**"default" preset:**    
 ![](sample/scr_0000.png)
+
+**"wide" preset:**    
+![](sample/wide_0000.png)
