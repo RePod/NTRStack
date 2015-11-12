@@ -9,9 +9,11 @@
 
 @echo off
 
+:: It is highly recommended settings are kept lowercase.
+
 :: Select the default preset to use when combining. Default: %~1
 :: If empty or %~1 falls back to "native". Can pass preset name via command line otherwise.
-:: Presets: native default custom wide
+:: Presets: default native custom wide
 set preset=%~1
 :: Orientation (if available), horizontal or vertical? Default: vertical
 set orient=vertical
@@ -19,6 +21,13 @@ set orient=vertical
 set cleantemp=yes
 :: Automatically remove source files (original top/bottom screen) when done? Default: no
 set cleansource=no
+
+:: *hax HANS screenshot-specific options
+:: Top screen preference, left/right/both. Default: left
+set top_screen=left
+:: If top_screen is "both", this is the screen on the left side. Default: right
+:: Right would be cross-eye 3D, left would be parallel view.
+set both_sbs=right
 
 
 ::
@@ -31,7 +40,7 @@ set cleansource=no
 
 
 
-if "%preset%" equ "" set preset=native
+if "%preset%" equ "" set preset=default
 echo Preset: %preset%
 :: These are the default settings which are then overwritten by the presets specified after them.
 :: Output prefix of combined images (prefix####.png). Default: scr_
@@ -80,14 +89,40 @@ goto :%preset%
 
 :post_preset
 :: Search for all files matching the pattern "bot_*.bmp" then pass them to the converter function.
-for %%x in (bot_*.bmp) do call :converter %%x
+for %%x in (scr_*_BOTTOM.png) do call :hans_converter %%x
+for %%x in (bot_*.bmp) do call :ntr_converter %%x
 
 :: Prevent the file from running the converter function below manually by skipping it.
 goto :eof
 
-:converter
+:hans_converter
     :: Strip out the numeric to pair with the top screen.
-    :: A lot of black magic happens here, don't question it.
+    set bottom=%1
+    set temp=%bottom%
+    :: Remove scr_ and _BOTTOM.png
+    set temp=%temp:~4,-11%
+    set left=scr_%temp%_TOP_LEFT.png
+    set right=scr_%temp%_TOP_RIGHT.png
+    set top=temp_top_%temp%.png
+    
+    :: Select the correct or combine the two top screens.
+    :: The If block we didn't know we needed. Surely this can be optimized.
+    if "%top_screen%" == "both" set scro=%left% %right%
+    if "%top_screen%" == "both" if "%both_sbs%" == "right" (set scro=%right% %left%)
+    if "%top_screen%" == "both" convert %scro% +append %top%
+    if "%top_screen%" == "left" convert %left% %top%
+    if "%top_screen%" == "right" convert %right% %top%
+    
+    convert -gravity center -background %color% %top% %bottom% -append %prefix%%temp%.png
+    
+    if "%cleantemp%" == "yes" del %top%
+    if "%cleansource%" == "yes" del %bottom% & del %left% & del %right% 
+    
+    echo Done: %prefix%%temp%.png
+    goto :eof
+
+:ntr_converter
+    :: Strip out the numeric to pair with the top screen.
     set temp=%1
     set temp=%temp:~4,4%
     set top=top_%temp%.bmp
@@ -109,5 +144,6 @@ goto :eof
     :: Delete the temporary and source files as needed, if enabled.
     if "%cleantemp%" == "yes" del temp_%~sn1.png & if "%padding%" == "yes" del %top%
     if "%cleansource%" == "yes" del %1 & del top_%temp%.bmp
+
 :eof
 echo Complete!
