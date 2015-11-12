@@ -1,25 +1,17 @@
-:: Intended to be used with 3DS NTR CFW's screenshot function, which spits out individual top and bottom screens.
-:: Save this batch file as "whateveryouwanttocallit.bat" and place in the folder with your top_####.bmp and bot_####.bmp files.
-:: Also supports HANS/*hax 2.5 screenshots in scr_#_*.png naming.
-
-:: If run without specifying a preset (usually by double-clicking), it'll use the "native" preset, which replicates home menu screenshots.
-:: Otherwise, the first argument should be the preset name.
-
+:: NTRStack - https://github.com/RePod/NTRStack
+:: Preset-based converter for NTR and HANS screenshots.
 :: Requires ImageMagick (latest preferred) to be installed and in your path ("convert" should be available from cmd).
-:: Get it here: http://imagemagick.org/script/binary-releases.php#windows
-:: The ImageMagick commands here aren't that bad, but definitely could be optimized with temporary image lists instead of working off temp files.
+:: It is highly recommended settings are kept lowercase.
 
 @echo off
 
-:: It is highly recommended settings are kept lowercase.
-
 :: Select the default preset to use when combining. Default: %~1
-:: If empty or %~1 falls back to "default". Can pass preset name via command line otherwise.
+:: If empty or %~1 falls back to "default". Can pass preset name as first argument otherwise.
 :: Presets: default native custom wide
 set preset=%~1
-:: Orientation (if available), horizontal or vertical? Default: vertical
+:: Orientation (if available), horizontal/vertical? Default: vertical
 set orient=vertical
-:: Automatically remove source files (original top/bottom screen) when done? Default: no
+:: Automatically remove source files (original top/bottom screens) when done? Default: no
 set cleansource=no
 
 :: *hax HANS screenshot-specific options
@@ -34,12 +26,9 @@ set dupe_bot=yes
 
 ::
 ::
-::    Casual users stop here, there is nothing more for you to do.
+::    Casual users stop here, there is nothing more for you to do except run it.
 ::
 ::
-
-
-
 
 
 if "%preset%" equ "" set preset=default
@@ -47,12 +36,10 @@ echo Preset: %preset%
 :: These are the default settings which are then overwritten by the presets specified after them.
 :: Output prefix of combined images (prefix####.png). Default: scr_
 set prefix=scr_
-:: Background color to use when resizing the bottom screen. Default: rgba(0,0,0,0) (transparent).
+:: Background color of whitespace. Default: rgba(0,0,0,0) (transparent).
 set color=rgba(0,0,0,0)
 :: Insert artificial padding to simulate home menu screenshots.
 set padding=no
-:: Gravity and Extent are useful for aligning the image, you probably shouldn't touch these.
-:: A good example of their usage is the "native" preset.
 :: http://www.imagemagick.org/script/command-line-options.php#gravity
 set top_gravity=center
 set bot_gravity=center
@@ -114,7 +101,6 @@ goto :eof
     if "%top_screen%" == "both" if "%dupe_bot%" == "yes" set bottom=( -extent 400x240 %bottom% %bottom% +append )
 
     convert %ops% %top% %bottom% -append %prefix%%temp%.png
-
     if "%cleansource%" == "yes" del %1 & del %left% & del %right%
 
     echo Done: %prefix%%temp%.png
