@@ -4,7 +4,8 @@ Combine screenshots taken by 3DS NTR CFW using Windows Command Line and ImageMag
 This could potentially support *hax 2.5 screenshots, the only difference is the naming scheme.    
 However, I'm lazy.
 
-Utilizes a sort of "preset" system to config basic options to achieve results. Scroll down to see examples of default presets included.
+Utilizes a sort of "preset" system to config basic options to achieve results.    
+Scroll down to see examples of default presets included.
 
 Requirements:
 ----
