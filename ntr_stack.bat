@@ -137,7 +137,6 @@ goto :eof
     set temp=%bottom:~4,-4%
     set top=top_%temp%.bmp
     set top2=%top%
-    set padding=yes
     set ops=-resize 400x240 -background %color% -gravity
 
     :: Transform the top and bottom screens as needed.
@@ -149,7 +148,7 @@ goto :eof
     if "%orient%" == "horizontal" set switch=+
 
     :: Combine and clean up.
-    convert %top% %bottom% %switch%append test.png
+    convert %top% %bottom% %switch%append %prefix%%temp%.png
     if "%cleansource%" == "yes" del %bottom2% & del %top2%
 
     echo Done: %prefix%%temp%.png
