@@ -1,6 +1,6 @@
 # NTRStack
 Combine screenshots taken by 3DS NTR CFW using Windows Command Line and ImageMagick.
-Also supports HANS/*hax 2.5+ screenshots, with 3D side-by-side options.
+Also supports HANS/*hax 2.5+ screenshots, with side-by-side 3D options.
 
 Utilizes a sort of "preset" system to config basic options to achieve results.    
 Scroll down to see examples of default presets included.
@@ -10,10 +10,14 @@ However, I'm lazy. I'll gladly accept pull requests that accomplish this.
 
 Requirements:
 ----
-- Windows
- - Command Line
+####Windows
+- Command Line
 - [ImageMagick](http://imagemagick.org/script/binary-releases.php#windows)
  - `convert` must be in your path and accessible from Command Line. The installer does this by default.
+
+####Everything else
+- *Soon? But also with ImageMagick.*
+- Possibly Wine.
 
 How to:
 ----
