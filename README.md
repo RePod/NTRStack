@@ -1,6 +1,6 @@
 # NTRStack
 Preset-based converter for NTR and HANS screenshots.    
-Combines NTR and HANS screenshots in various, configurable ways using ImageMagick.
+Combines NTR and HANS screenshots in various, configurable ways using ImageMagick.    
 HANS has additional options for side-by-side 3D images.
 
 Utilizes a sort of "preset" system to config basic options to achieve results.    
