@@ -1,6 +1,11 @@
 # NTRStack
 Combine screenshots taken by 3DS NTR CFW using Windows Command Line and ImageMagick.
 
+This could potentially support *hax 2.5 screenshots, the only difference is the naming scheme.    
+However, I'm lazy.
+
+Utilizes a sort of "preset" system to config basic options to achieve results. Scroll down to see examples of default presets included.
+
 Requirements:
 ----
 - Windows
@@ -17,16 +22,11 @@ How to:
 4. Run the BAT.
  - The first argument can be the preset name.
 
-
-This could potentially support *hax 2.5 screenshots, the only difference is the naming scheme.
-
-However, I'm lazy.
-
-**"native" preset:**    
+**"native" preset:** *(pads similar to homemenu screenshots)*    
 !["native" preset](sample/HNI_0000.png)
 
-**"default" preset:**    
+**"default" preset:** *(stacks them normally)*    
 ![](sample/scr_0000.png)
 
-**"wide" preset:**    
+**"wide" preset:** *(puts them side by side)*    
 ![](sample/wide_0000.png)
