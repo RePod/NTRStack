@@ -6,6 +6,7 @@ Requirements:
 - Windows
  - Command Line
 - [ImageMagick](http://imagemagick.org/script/binary-releases.php#windows)
+ - `convert` must be in your path and accessible from Command Line. The installer does this by default.
 
 How to:
 ----
