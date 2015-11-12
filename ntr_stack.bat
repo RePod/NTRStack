@@ -10,15 +10,15 @@
 @echo off
 
 :: Select the default preset to use when combining. Default: %~1
-:: Presets: native default custom horizontal
 :: If empty or %~1 falls back to "native". Can pass preset name via command line otherwise.
+:: Presets: native default custom horizontal
 set preset=%~1
 :: Orientation (if available), horizontal or vertical? Default: vertical
 set orient=vertical
 :: Automatically delete temporary files (bottom screen) when done? Default: yes
 set cleantemp=yes
 :: Automatically remove source files (original top/bottom screen) when done? Default: no
-set cleansource=yes
+set cleansource=no
 
 
 ::
