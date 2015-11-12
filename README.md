@@ -10,7 +10,7 @@ Requirements:
 
 How to:
 ----
-1. Save or create a new [BAT file](https://github.com/RePod/NTRStack/blob/master/ntr_stack.bat) in the desired working folder.
+1. Save or create a new [BAT file](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat) in the desired working folder.
 2. Place the screenshots in the same folder.
 3. Modify the early lines containing `preset`, `orient`, `cleantemp`, and `cleansource` as needed.
  - Or not, the defaults are fine.
