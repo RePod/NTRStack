@@ -11,7 +11,7 @@
 
 :: Select the default preset to use when combining. Default: %~1
 :: If empty or %~1 falls back to "native". Can pass preset name via command line otherwise.
-:: Presets: native default custom horizontal
+:: Presets: native default custom wide
 set preset=%~1
 :: Orientation (if available), horizontal or vertical? Default: vertical
 set orient=vertical
@@ -31,7 +31,7 @@ set cleansource=no
 
 
 
-if "%~1" equ "" set preset=native
+if "%preset%" equ "" set preset=native
 echo Preset: %preset%
 :: These are the default settings which are then overwritten by the presets specified after them.
 :: Output prefix of combined images (prefix####.png). Default: scr_
@@ -61,9 +61,9 @@ goto :%preset%
     set orient=vertical
     :: Do not process other presets.
     goto :post_preset
-:horizontal
+:wide
     :: Simple preset that combines them horizontally.
-    set prefix=scr_
+    set prefix=wide_
     set orient=horizontal
     goto :post_preset
 :native
