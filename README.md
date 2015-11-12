@@ -21,3 +21,6 @@ How to:
 This could potentially support *hax 2.5 screenshots, the only difference is the naming scheme.
 
 However, I'm lazy.
+
+![](sample/HNI_0000.png)
+![](sample/scr_0000.png)
