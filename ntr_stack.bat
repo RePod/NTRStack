@@ -19,8 +19,6 @@
 set preset=%~1
 :: Orientation (if available), horizontal or vertical? Default: vertical
 set orient=vertical
-:: Automatically delete temporary files (bottom screen) when done? Default: yes
-set cleantemp=yes
 :: Automatically remove source files (original top/bottom screen) when done? Default: no
 set cleansource=no
 
@@ -92,41 +90,32 @@ goto :%preset%
     goto :post_preset
 
 :post_preset
-:: Search for all files matching the pattern "bot_*.bmp" then pass them to the converter function.
 for %%x in (scr_*_BOTTOM.png) do call :hans_converter %%x
 for %%x in (bot_*.bmp) do call :ntr_converter %%x
-
-:: Prevent the file from running the converter function below manually by skipping it.
 goto :eof
 
 :hans_converter
-    :: Strip out the numeric to pair with the top screen.
     set bottom=%1
-    set temp=%bottom%
-    :: Remove scr_ and _BOTTOM.png
-    set temp=%temp:~4,-11%
+    set temp=%bottom:~4,-11%
     set left=scr_%temp%_TOP_LEFT.png
     set right=scr_%temp%_TOP_RIGHT.png
-    set top=temp_top_%temp%.png
     set ops=-gravity center -background %color%
 
     :: Select the correct or combine the two top screens.
     :: The If block we didn't know we needed. Surely this can be optimized.
     if "%top_screen%" == "both" set scro=%left% %right%
     if "%top_screen%" == "both" if "%both_sbs%" == "right" (set scro=%right% %left%)
-    if "%top_screen%" == "both" convert %scro% +append %top%
-    if "%top_screen%" == "left" convert %left% %top%
-    if "%top_screen%" == "right" convert %right% %top%
+    if "%top_screen%" == "both" set top=( %scro% +append )
+    if "%top_screen%" == "left" set top=%left%
+    if "%top_screen%" == "right" set top=%right%
 
 
     :: If using both screens and duping bottom, do so.
-    set dupe=%bottom%
-    if "%top_screen%" == "both" if "%dupe_bot%" == "yes" set dupe=( -extent 400x240 %bottom% %bottom% +append )
+    if "%top_screen%" == "both" if "%dupe_bot%" == "yes" set bottom=( -extent 400x240 %bottom% %bottom% +append )
 
-    convert %ops% %top% %dupe% -append %prefix%%temp%.png
+    convert %ops% %top% %bottom% -append %prefix%%temp%.png
 
-    if "%cleantemp%" == "yes" del %top%
-    if "%cleansource%" == "yes" del %bottom% & del %left% & del %right%
+    if "%cleansource%" == "yes" del %1 & del %left% & del %right%
 
     echo Done: %prefix%%temp%.png
     goto :eof
