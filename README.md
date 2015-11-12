@@ -30,7 +30,8 @@ How to:
 
 Default presets:
 ----
-Click images to see a more detailed view of dimensions and transparency.
+Click images to see a more detailed view of dimensions and transparency.    
+Results may differ between NTR and HANS screenshots.
 
 **native** *(pads similar to homemenu screenshots, padding white)*    
 !["native" preset](sample/HNI_0000.png)
