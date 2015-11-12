@@ -14,7 +14,7 @@
 :: It is highly recommended settings are kept lowercase.
 
 :: Select the default preset to use when combining. Default: %~1
-:: If empty or %~1 falls back to "native". Can pass preset name via command line otherwise.
+:: If empty or %~1 falls back to "default". Can pass preset name via command line otherwise.
 :: Presets: default native custom wide
 set preset=%~1
 :: Orientation (if available), horizontal or vertical? Default: vertical
@@ -109,7 +109,7 @@ goto :eof
     set right=scr_%temp%_TOP_RIGHT.png
     set top=temp_top_%temp%.png
     set ops=-gravity center -background %color%
-    
+
     :: Select the correct or combine the two top screens.
     :: The If block we didn't know we needed. Surely this can be optimized.
     if "%top_screen%" == "both" set scro=%left% %right%
@@ -117,43 +117,42 @@ goto :eof
     if "%top_screen%" == "both" convert %scro% +append %top%
     if "%top_screen%" == "left" convert %left% %top%
     if "%top_screen%" == "right" convert %right% %top%
-    
+
 
     :: If using both screens and duping bottom, do so.
     set dupe=%bottom%
-    if "%top_screen%" == "both" if "%dupe_bot%" == "yes" set dupe=( -extent 400x240 %bottom% %bottom% +append ) 
+    if "%top_screen%" == "both" if "%dupe_bot%" == "yes" set dupe=( -extent 400x240 %bottom% %bottom% +append )
 
     convert %ops% %top% %dupe% -append %prefix%%temp%.png
-    
+
     if "%cleantemp%" == "yes" del %top%
-    if "%cleansource%" == "yes" del %bottom% & del %left% & del %right% 
-    
+    if "%cleansource%" == "yes" del %bottom% & del %left% & del %right%
+
     echo Done: %prefix%%temp%.png
     goto :eof
 
 :ntr_converter
-    :: Strip out the numeric to pair with the top screen.
-    set temp=%1
-    set temp=%temp:~4,4%
+    set bottom=%1
+    set bottom2=%bottom%
+    set temp=%bottom:~4,-4%
     set top=top_%temp%.bmp
-    if "%padding%" == "yes" set top=temp_top_%temp%.png
-    set command=-resize 400x240 -background %color% -compose Copy -gravity
-    set command2=%bot_gravity% -extent %bot_extent%
-    if "%padding%" == "yes" convert top_%temp%.bmp %command% %top_gravity% -extent %top_extent% %top%
-    if "%padding%" == "yes" set command2=%bot_gravity% -extent %bot_extent%
-    if "%orient%" == "vertical" set orient_expand=%command% %command2%
+    set top2=%top%
+    set padding=yes
+    set ops=-resize 400x240 -background %color% -gravity
 
-    convert %1 %orient_expand% temp_%~sn1.png
+    :: Transform the top and bottom screens as needed.
+    if "%padding%" == "yes" set top=( %ops% %top_gravity% -extent %top_extent% %top% )
+    if "%orient%" == "vertical" set bottom=( %ops% %bot_gravity% -extent %bot_extent% %bottom% )
 
-    :: Combine the top screen and bottom screen to a single file.
+    :: Determine orientation.
     set switch=-
     if "%orient%" == "horizontal" set switch=+
-    convert %top% temp_%~sn1.png %switch%append %prefix%%temp%.png
-    echo Done: %prefix%%temp%.png
 
-    :: Delete the temporary and source files as needed, if enabled.
-    if "%cleantemp%" == "yes" del temp_%~sn1.png & if "%padding%" == "yes" del %top%
-    if "%cleansource%" == "yes" del %1 & del top_%temp%.bmp
+    :: Combine and clean up.
+    convert %top% %bottom% %switch%append test.png
+    if "%cleansource%" == "yes" del %bottom2% & del %top2%
+
+    echo Done: %prefix%%temp%.png
 
 :eof
 echo Complete!
