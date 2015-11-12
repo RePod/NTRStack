@@ -2,7 +2,6 @@
 :: Preset-based converter for NTR and HANS screenshots.
 :: Requires ImageMagick (latest preferred) to be installed and in your path ("convert" should be available from cmd).
 :: It is highly recommended settings are kept lowercase.
-
 @echo off
 
 :: Select the default preset to use when combining. Default: %~1
@@ -14,9 +13,9 @@ set orient=vertical
 :: Automatically remove source files (original top/bottom screens) when done? Default: no
 set cleansource=no
 
-:: *hax HANS screenshot-specific options
-:: Top screen preference, left/right/both. Default: left
-set top_screen=left
+:: HANS/*hax screenshot-specific options
+:: Top screen preference, left/right/both. Default: both
+set top_screen=both
 :: If top_screen is "both", this is the screen on the left side. Default: right
 :: Right would be cross-eye 3D, left would be parallel view.
 set both_sbs=right
@@ -40,10 +39,9 @@ set prefix=scr_
 set color=rgba(0,0,0,0)
 :: Insert artificial padding to simulate home menu screenshots.
 set padding=no
-:: http://www.imagemagick.org/script/command-line-options.php#gravity
+:: See "native" preset.
 set top_gravity=center
 set bot_gravity=center
-:: http://www.imagemagick.org/script/command-line-options.php#extent
 set top_extent=400x240
 set bot_extent=400x240
 
@@ -75,12 +73,10 @@ goto :%preset%
     set top_extent=432x272
     set bot_extent=432x256
     goto :post_preset
-
 :post_preset
 for %%x in (scr_*_BOTTOM.png) do call :hans_converter %%x
 for %%x in (bot_*.bmp) do call :ntr_converter %%x
 goto :eof
-
 :hans_converter
     set bottom=%1
     set temp=%bottom:~4,-11%
@@ -88,24 +84,20 @@ goto :eof
     set right=scr_%temp%_TOP_RIGHT.png
     set ops=-gravity center -background %color%
 
-    :: Select the correct or combine the two top screens.
-    :: The If block we didn't know we needed. Surely this can be optimized.
+    :: Select the correct or combine the two top screens. Optimize.
     if "%top_screen%" == "both" set scro=%left% %right%
     if "%top_screen%" == "both" if "%both_sbs%" == "right" (set scro=%right% %left%)
     if "%top_screen%" == "both" set top=( %scro% +append )
     if "%top_screen%" == "left" set top=%left%
     if "%top_screen%" == "right" set top=%right%
 
-
     :: If using both screens and duping bottom, do so.
     if "%top_screen%" == "both" if "%dupe_bot%" == "yes" set bottom=( -extent 400x240 %bottom% %bottom% +append )
 
     convert %ops% %top% %bottom% -append %prefix%%temp%.png
     if "%cleansource%" == "yes" del %1 & del %left% & del %right%
-
     echo Done: %prefix%%temp%.png
     goto :eof
-
 :ntr_converter
     set bottom=%1
     set bottom2=%bottom%
@@ -125,8 +117,6 @@ goto :eof
     :: Combine and clean up.
     convert %top% %bottom% %switch%append %prefix%%temp%.png
     if "%cleansource%" == "yes" del %bottom2% & del %top2%
-
     echo Done: %prefix%%temp%.png
-
 :eof
 echo Complete!
