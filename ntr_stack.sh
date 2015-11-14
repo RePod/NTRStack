@@ -74,8 +74,8 @@ ntr_converter() {
   top=top_$temp.bmp
   top2=$top
   ops="-resize 400x240 -background $color -gravity"
-  [ "$padding" == "yes" ] && "( $ops $top_gravity -extent $top_extent $top )"
   [ "$orient" == "vertical" ] && bottom="( $ops $bot_gravity -extent $bot_extent $bottom )"
+  [ "$padding" == "yes" ] && top="( $ops $top_gravity -extent $top_extent $top )"
   switch="-"
   [ "$orient" == "horizontal" ] && switch="+"
   convert $top $bottom ${switch}append $prefix$temp.png
