@@ -26,7 +26,9 @@ How to:
  - [BAT](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat) (Windows)
  - [SH](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh) (*nix) 
 2. Place the screenshots in the same folder.
-4. Run it.
+4. Run NTRStack.
+ - On Windows, double clicking the `.bat` is enough.
+ - On *nix you may need to mark it as executable (`chmod +x ntr_stack.sh`) before using it.
 
 **Tips**
  - The first argument can be the desired preset name, overriding the default.
