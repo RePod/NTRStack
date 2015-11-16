@@ -6,8 +6,7 @@ HANS has additional options for side-by-side 3D images.
 Utilizes a sort of "preset" system to config basic options to achieve results.    
 Scroll down to see examples of default presets included.
 
-Could potentially be made for Bash, given most of the work is done by ImageMagick.    
-However, I'm lazy. I'll gladly accept pull requests that accomplish this.
+The code may not be the most optimized, but it works!
 
 Requirements:
 ----
@@ -17,7 +16,10 @@ Requirements:
  - `convert` must be in your path and accessible from Command Line. The installer does this by default.
 
 ####Everything else
+- ImageMagick
+ - `convert` must be in your path and accessible from terminal.
 - There's [ntr_stack.sh](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh)
+ - If you have to use this you probably don't need instructions.
 
 How to:
 ----
