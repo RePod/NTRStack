@@ -31,7 +31,7 @@ How to:
 
 **Tips**
  - The first argument can be the desired preset name, overriding the default.
- - The code can be editted to change various settings for different results.
+ - The code can be edited to change various settings for different results.
 
 Default presets:
 ----
