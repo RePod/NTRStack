@@ -17,17 +17,19 @@ Requirements:
  - `convert` must be in your path and accessible from Command Line. The installer does this by default.
 
 ####Everything else
-- *Soon? But also with ImageMagick.*
-- Possibly Wine.
+- There's [ntr_stack.sh](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh)
 
 How to:
 ----
-1. Save or create a new [BAT file](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat) in the desired working folder.
+1. Save or create a new (below) where you want: (*Right-click*, *Save link as...*)
+ - [BAT](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat) (Windows)
+ - [SH](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh) (*nix) 
 2. Place the screenshots in the same folder.
-3. Go through and modify the options up until the "casuals beware" line.
- - Or not, the defaults are fine.
-4. Run the BAT.
- - The first argument can be the preset name.
+4. Run it.
+
+**Tips**
+ - The first argument can be the desired preset name, overriding the default.
+ - The code can be editted to change various settings for different results.
 
 Default presets:
 ----
