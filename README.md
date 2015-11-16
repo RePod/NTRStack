@@ -11,15 +11,14 @@ The code may not be the most optimized, but it works!
 Requirements:
 ----
 ####Windows
-- Command Line
-- [ImageMagick](http://imagemagick.org/script/binary-releases.php#windows)
+- [NTRStack for Windows](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat)
+- - [ImageMagick](http://imagemagick.org/script/binary-releases.php#windows)
  - `convert` must be in your path and accessible from Command Line. The installer does this by default.
 
 ####Everything else
+- [NTRStack for everything else](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh)
 - ImageMagick
  - `convert` must be in your path and accessible from terminal.
-- There's [ntr_stack.sh](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh)
- - If you have to use this you probably don't need instructions.
 
 How to:
 ----
