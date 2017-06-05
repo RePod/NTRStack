@@ -1,4 +1,6 @@
 # NTRStack
+**June 5th, 2017:** *Most likely* supports Luma 8.0+ screenshots similar to NTR.
+
 Preset-based converter for NTR and HANS screenshots.    
 Combines NTR and HANS screenshots in various, configurable ways using ImageMagick.    
 HANS has additional options for side-by-side 3D images.
@@ -10,25 +12,25 @@ The code may not be the most optimized, but it works!
 
 Requirements:
 ----
-####Windows
-- [NTRStack for Windows](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat)
-- - [ImageMagick](http://imagemagick.org/script/binary-releases.php#windows)
- - `convert` must be in your path and accessible from Command Line. The installer does this by default.
+### Windows
+ - [NTRStack for Windows](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat)
+ - [ImageMagick](http://imagemagick.org/script/binary-releases.php#windows)
+   - `convert` must be in your path and accessible from Command Line. The installer does this by default.
 
-####Everything else
+### Everything else
 - [NTRStack for everything else](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh)
 - ImageMagick
- - `convert` must be in your path and accessible from terminal.
+  - `convert` must be in your path and accessible from terminal.
 
 How to:
 ----
 1. Save or create a new (below) where you want: (*Right-click*, *Save link as...*)
- - [BAT](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat) (Windows)
- - [SH](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh) (*nix) 
+   - [BAT](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.bat) (Windows)
+   - [SH](https://raw.githubusercontent.com/RePod/NTRStack/master/ntr_stack.sh) (*nix) 
 2. Place the screenshots in the same folder.
 4. Run NTRStack.
- - On Windows, double clicking the `.bat` is enough.
- - On *nix you may need to mark it as executable (`chmod +x ntr_stack.sh`) before using it.
+   - On Windows, double clicking the `.bat` is enough.
+   - On *nix you may need to mark it as executable (`chmod +x ntr_stack.sh`) before using it.
 
 **Tips**
  - The first argument can be the desired preset name, overriding the default.
